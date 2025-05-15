@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "b157897a-fa86-4cbb-a3ed-6b2c2411322e",
+		"name": "Twitter clone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37850747",
+		"_collection_link": "https://restless-meadow-230620.postman.co/workspace/My-Workspace~9e38821f-d9f7-4f7c-82cc-77d116049b64/collection/37850747-b157897a-fa86-4cbb-a3ed-6b2c2411322e?action=share&source=collection_link&creator=37850747"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"dmitryace\",\r\n  \"email\": \"dm1tryace@yandex.ru\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{adress}}/api/v1/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "dm1tryace@yandex.ru",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "name",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": "{{adress}}/api/v1/token"
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{adress}}/api/v1/confirm?email=dm1tryace@yandex.ru&code=123456",
+							"host": [
+								"{{adress}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"confirm"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "dm1tryace@yandex.ru"
+								},
+								{
+									"key": "code",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Confirmation Status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dm1tryace@yandex.ru\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{adress}}/api/v1/confirm"
+					},
+					"response": []
+				},
+				{
+					"name": "Update profile",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/X:/趣味/Базис/случайные топ пикчи/gouhin.jpg"
+								}
+							]
+						},
+						"url": "{{adress}}/api/v1/user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{adress}}/api/v1/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{adress}}/api/v1/users"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"text\": \"string\",\r\n  \"parent_id\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{adress}}/api/v1/posts/"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"text\": \"string\",\r\n  \"id\":1\r\n}"
+						},
+						"url": "{{adress}}/api/v1/users/1/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adress}}/api/v1/posts?page=1&size=1",
+							"host": [
+								"{{adress}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Likes/Follows",
+			"item": [
+				{
+					"name": "Toggle Follow",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{adress}}/api/v1/follow/2/"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Followers/Followed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{adress}}/api/v1/follow/1/"
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle Like",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{adress}}/api/v1/posts/3/like"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkbWl0cnlhY2UiLCJleHAiOjE3NDczMjk3ODd9.TbCjzfXIKcbkWuD1FGaJKQ1iBcmxEmLbDVI5kieXGrw"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "adress",
+			"value": "https://twitterclone.dmace.keenetic.pro",
+			"type": "string"
+		},
+		{
+			"key": "adress",
+			"value": "http://127.0.0.1:8000",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
